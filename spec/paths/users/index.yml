@@ -1,0 +1,13 @@
+get:
+  tags:
+    - "users"
+  parameters:
+    - $ref: "#/parameters/PageSize"
+    - $ref: "#/parameters/Page"
+  responses:
+    200:
+      description: "successful operation"
+      schema:
+        type: "array"
+        items:
+          $ref: "#/definitions/User"

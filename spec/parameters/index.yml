@@ -1,0 +1,51 @@
+Category:
+  name: "category"
+  in: "body"
+  required: true
+  schema:
+    $ref: "#/definitions/Category"
+Username:
+  name: "username"
+  in: "path"
+  description: "username of user to return"
+  required: true
+  type: "string"
+User:
+  name: "user"
+  in: "body"
+  required: true
+  schema:
+    $ref: "#/definitions/User"
+  description: The user data for create/update operations
+Project:
+  name: "project"
+  in: "body"
+  required: true
+  schema:
+    $ref: "#/definitions/Project"
+PluginId:
+  name: "pluginId"
+  in: "path"
+  description: "pluginId of plugin to return"
+  required: true
+  type: "string"
+Version:
+  name: "version"
+  in: "path"
+  description: "version of the plugin to return"
+  required: true
+  type: "string"
+Page:
+  name: "pageSize"
+  in: "query"
+  required: false
+  default: 25
+  type: "integer"
+  format: "int64"
+PageSize:
+  name: "page"
+  in: "query"
+  required: false
+  default: 1
+  type: "integer"
+  format: "int64"

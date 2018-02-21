@@ -1,0 +1,14 @@
+/category:
+  $ref: ./categories/index.yml
+/projects:
+  $ref: ./projects/index.yml
+/projects/{pluginId}:
+  $ref: ./projects/project/index.yml
+/projects/{pluginId}/versions:
+  $ref: ./projects/project/versions/index.yml
+/projects/{pluginId}/versions/{version}:
+  $ref: ./projects/project/versions/version/index.yml
+/users:
+  $ref: ./users/index.yml
+/user/{username}:
+  $ref: ./users/user/index.yml

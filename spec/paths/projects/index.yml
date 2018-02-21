@@ -1,0 +1,27 @@
+get:
+  tags:
+    - "projects"
+  summary: "List all Project's page by page"
+  parameters:
+    - $ref: "#/parameters/PageSize"
+    - $ref: "#/parameters/Page"
+  responses:
+    200:
+      description: "successful operation"
+      schema:
+        type: "array"
+        items:
+          $ref: "#/definitions/Project"  
+post:
+  tags:
+    - "projects"
+  summary: "Creates a new Project"
+  parameters:
+  - $ref: "#/parameters/Project"
+  responses:
+    200:
+      description: Project was created successfully
+      schema:
+        $ref: "#/definitions/Project"
+    400:
+      description: Bad JSON formatting in the request

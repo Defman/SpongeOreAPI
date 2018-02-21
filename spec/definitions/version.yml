@@ -1,0 +1,21 @@
+type: "object"
+properties:
+  id:
+    type: "integer"
+    format: "int64"
+  createdAt:
+    type: "string"
+    format: "date-time"
+  name:
+    type: "string"
+  dependencies:
+    type: "array"
+    items:
+      $ref: "#/definitions/PluginId"
+  pluginId:
+    $ref: "#/definitions/PluginId"
+  channel:
+    $ref: "#/definitions/Channel"
+  filesize:
+    type: "integer"
+    format: "int64"

@@ -1,0 +1,13 @@
+get:
+  tags:
+    - "projects"
+  summary: "Returns the Version's of the specified Project"
+  parameters:
+  - $ref: "#/parameters/PluginId"
+  responses:
+    200:
+      description: "successful operation"
+      schema:
+        type: "array"
+        items:
+          $ref: "#/definitions/Version"

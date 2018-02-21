@@ -1,0 +1,34 @@
+type: "object"
+properties:
+  pluginId:
+    $ref: "#/definitions/PluginId"
+  createdAt:
+    type: "string"
+    format: "date-time"
+  name:
+    type: "string"
+  owner:
+    type: "string"
+  description:
+    type: "string"
+  members:
+    type: "array"
+    items:
+      $ref: "#/definitions/Member"
+  channels:
+    type: "array"
+    items:
+      $ref: "#/definitions/Channel"
+  recommended:
+    $ref: "#/definitions/Version"
+  category:
+    $ref: "#/definitions/Category"
+  views:
+    type: "integer"
+    format: "int64"
+  downloads:
+    type: "integer"
+    format: "int64"
+  stars:
+    type: "integer"
+    format: "int64"

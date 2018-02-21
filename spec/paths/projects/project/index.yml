@@ -1,0 +1,27 @@
+get:
+  tags:
+    - "projects"
+  summary: "Returns the specified Project"
+  parameters:
+  - $ref: "#/parameters/PluginId"
+  responses:
+    200:
+      description: "successful operation"
+      schema:
+        $ref: "#/definitions/Project"
+patch:
+  tags:
+    - "projects"
+  summary: "Updates the specified Project"
+  parameters:
+  - $ref: "#/parameters/PluginId"
+  - $ref: "#/parameters/Project"
+  responses:
+    200:
+      description: Project was saved successfully
+      schema:
+        $ref: "#/definitions/Project"
+    400:
+      description: Bad JSON formatting in the request
+    401:
+      description: You tried to edit someone else's project, and you're not the "admin" user.

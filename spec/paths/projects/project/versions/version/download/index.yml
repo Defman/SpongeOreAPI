@@ -1,0 +1,13 @@
+get:
+  tags:
+    - "projects"
+  parameters:
+  - $ref: "#/parameters/PluginId"
+  - $ref: "#/parameters/Version"
+  produces:
+    - "application/java-archive"
+  responses:
+    200:
+      description: "successful operation"
+      schema:
+        type : "file"

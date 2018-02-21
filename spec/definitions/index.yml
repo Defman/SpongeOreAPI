@@ -1,0 +1,18 @@
+Category:
+  $ref: ./category.yml
+Channel:
+  $ref: ./channel.yml
+ErrorMessage:
+  $ref: ./errorMessage.yml
+Role:
+  $ref: ./role.yml
+Member:
+  $ref: ./member.yml
+PluginId:
+  $ref: ./pluginid.yml
+Project:
+  $ref: ./project.yml
+User:
+  $ref: ./user.yml
+Version:
+  $ref: ./version.yml

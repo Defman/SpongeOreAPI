@@ -1,0 +1,13 @@
+type: "object"
+properties:
+  userId:
+    type: "integer"
+    format: "int64"
+  name:
+    type: "string"
+  roles:
+    type: "array"
+    items:
+      $ref: "#/definitions/Role"
+  headRole:
+    $ref: "#/definitions/Role"

@@ -1,0 +1,358 @@
+swagger: "2.0"
+info:
+  description: ""
+  version: "0.0.0"
+  title: "SpongePowered Ore API"
+host: "ore.spongepowered.org"
+schemes:
+- "http"
+produces:
+  - "application/json"
+consumes:
+  - application/json
+paths:
+  /categories:
+    get:
+      tags:
+        - "categories"
+      summary: "Returns all categories"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Category"  
+    post:
+      tags:
+        - "categories"
+      summary: "Creates a new Category"
+      parameters:
+      - $ref: "#/parameters/Category"
+      responses:
+        200:
+          description: Category was created successfully
+          schema:
+            $ref: "#/definitions/Category"
+        400:
+          description: Bad JSON formatting in the request
+        401:
+          description: You tried to create a category, and you're not the "admin" user.
+  /projects:
+    get:
+      tags:
+        - "projects"
+      summary: "List all Project's page by page"
+      parameters:
+        - $ref: "#/parameters/PageSize"
+        - $ref: "#/parameters/Page"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Project"  
+    post:
+      tags:
+        - "projects"
+      summary: "Creates a new Project"
+      parameters:
+      - $ref: "#/parameters/Project"
+      responses:
+        200:
+          description: Project was created successfully
+          schema:
+            $ref: "#/definitions/Project"
+        400:
+          description: Bad JSON formatting in the request
+  /projects/{pluginId}:
+    get:
+      tags:
+        - "projects"
+      summary: "Returns the specified Project"
+      parameters:
+      - $ref: "#/parameters/PluginId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Project"
+    patch:
+      tags:
+        - "projects"
+      summary: "Updates the specified Project"
+      parameters:
+      - $ref: "#/parameters/PluginId"
+      - $ref: "#/parameters/Project"
+      responses:
+        200:
+          description: Project was saved successfully
+          schema:
+            $ref: "#/definitions/Project"
+        400:
+          description: Bad JSON formatting in the request
+        401:
+          description: You tried to edit someone else's project, and you're not the "admin" user.
+  /projects/{pluginId}/versions:
+    get:
+      tags:
+        - "projects"
+      summary: "Returns the Version's of the specified Project"
+      parameters:
+      - $ref: "#/parameters/PluginId"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Version"  
+  /projects/{pluginId}/versions/{version}:
+    get:
+      tags:
+        - "projects"
+      summary: "Returns the Version for the specified Project and Version name"
+      parameters:
+      - $ref: "#/parameters/PluginId"
+      - $ref: "#/parameters/Version"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Version"
+  /projects/{pluginId}/versions/{version}/download:
+    get:
+      tags:
+        - "projects"
+      parameters:
+      - $ref: "#/parameters/PluginId"
+      - $ref: "#/parameters/Version"
+      produces:
+        - "application/java-archive"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type : "file"
+  /users:
+    get:
+      tags:
+        - "users"
+      parameters:
+        - $ref: "#/parameters/PageSize"
+        - $ref: "#/parameters/Page"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
+  /users/{username}:
+    get:
+      tags:
+        - "users"
+      parameters:
+      - $ref: "#/parameters/Username"
+      responses:
+        200:
+          description: Returns the user's data
+          schema:
+            $ref: "#/definitions/User"
+        404:
+          description: The {username} was not found
+    patch:
+      tags:
+        - "users"
+      parameters:
+      - $ref: "#/parameters/Username"
+      - $ref: "#/parameters/User"
+      responses:
+        200:
+          description: User data was saved successfully
+          schema:
+            $ref: "#/definitions/User"
+        400:
+          description: Bad JSON formatting in the request
+        401:
+          description: You tried to edit someone else's account, and you're not the "admin" user.
+        404:
+          description: The {username} was not found
+    delete:
+      tags:
+        - "users"
+      parameters:
+      - $ref: "#/parameters/Username"
+      responses:
+        204:
+          description: User was deleted
+        401:
+          description: You tried to edit someone else's account, and you're not the "admin" user.
+        404:
+          description: The {username} was not found
+parameters:
+  Category:
+    name: "category"
+    in: "body"
+    required: true
+    schema:
+      $ref: "#/definitions/Category"
+  Username:
+    name: "username"
+    in: "path"
+    description: "username of user to return"
+    required: true
+    type: "string"
+  User:
+    name: "user"
+    in: "body"
+    required: true
+    schema:
+      $ref: "#/definitions/User"
+    description: The user data for create/update operations
+  Project:
+    name: "project"
+    in: "body"
+    required: true
+    schema:
+      $ref: "#/definitions/Project"
+  PluginId:
+    name: "pluginId"
+    in: "path"
+    description: "pluginId of plugin to return"
+    required: true
+    type: "string"
+  Version:
+    name: "version"
+    in: "path"
+    description: "version of the plugin to return"
+    required: true
+    type: "string"
+  Page:
+    name: "pageSize"
+    in: "query"
+    required: false
+    default: 25
+    type: "integer"
+    format: "int64"
+  PageSize:
+    name: "page"
+    in: "query"
+    required: false
+    default: 1
+    type: "integer"
+    format: "int64"
+definitions:
+  Category:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      icon:
+        type: "string"
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      createdAt:
+        type: "string"
+        format: "date-time"
+      username:
+        type: "string"
+      roles:
+        type: "array"
+        items:
+          $ref: "#/definitions/Role"
+      projects:
+        type: "array"
+        items:
+          $ref: "#/definitions/PluginId"
+      stared:
+        type: "array"
+        items:
+          $ref: "#/definitions/PluginId"
+  Project:
+    type: "object"
+    properties:
+      pluginId:
+        $ref: "#/definitions/PluginId"
+      createdAt:
+        type: "string"
+        format: "date-time"
+      name:
+        type: "string"
+      owner:
+        type: "string"
+      description:
+        type: "string"
+      members:
+        type: "array"
+        items:
+          $ref: "#/definitions/Member"
+      channels:
+        type: "array"
+        items:
+          $ref: "#/definitions/Channel"
+      recommended:
+        $ref: "#/definitions/Version"
+      category:
+        $ref: "#/definitions/Category"
+      views:
+        type: "integer"
+        format: "int64"
+      downloads:
+        type: "integer"
+        format: "int64"
+      stars:
+        type: "integer"
+        format: "int64"
+  Version:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      createdAt:
+        type: "string"
+        format: "date-time"
+      name:
+        type: "string"
+      dependencies:
+        type: "array"
+        items:
+          type: "string"
+      pluginId:
+        $ref: "#/definitions/PluginId"
+      channel:
+        $ref: "#/definitions/Channel"
+      filesize:
+        type: "integer"
+        format: "int64"
+  Role:
+    type: "string"
+  Member:
+    type: "object"
+    properties:
+      userId:
+        type: "integer"
+        format: "int64"
+      name:
+        type: "string"
+      roles:
+        type: "array"
+        items:
+          $ref: "#/definitions/Role"
+      headRole:
+        $ref: "#/definitions/Role"
+  Channel:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+      color:
+        type: "string"
+  PluginId:
+    type: "string"

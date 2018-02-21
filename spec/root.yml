@@ -1,0 +1,16 @@
+swagger: "2.0"
+info:
+  title: "ore-api"
+  version: "0.0.0"
+schemes:
+- "http"
+produces:
+  - "application/json"
+consumes:
+  - application/json
+definitions:
+  $ref: './definitions/index.yml'
+parameters:
+  $ref: './parameters/index.yml'
+paths:
+  $ref: './paths/index.yml'

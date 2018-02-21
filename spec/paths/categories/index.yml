@@ -1,0 +1,26 @@
+get:
+  tags:
+    - "categories"
+  summary: "Returns all categories"
+  responses:
+    200:
+      description: "successful operation"
+      schema:
+        type: "array"
+        items:
+          $ref: "#/definitions/Category"  
+post:
+  tags:
+    - "categories"
+  summary: "Creates a new Category"
+  parameters:
+  - $ref: "#/parameters/Category"
+  responses:
+    200:
+      description: Category was created successfully
+      schema:
+        $ref: "#/definitions/Category"
+    400:
+      description: Bad JSON formatting in the request
+    401:
+      description: You tried to create a category, and you're not the "admin" user.

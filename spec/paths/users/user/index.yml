@@ -1,0 +1,41 @@
+get:
+  tags:
+    - "users"
+  parameters:
+  - $ref: "#/parameters/Username"
+  responses:
+    200:
+      description: Returns the user's data
+      schema:
+        $ref: "#/definitions/User"
+    404:
+      description: The {username} was not found
+patch:
+  tags:
+    - "users"
+  parameters:
+  - $ref: "#/parameters/Username"
+  - $ref: "#/parameters/User"
+  responses:
+    200:
+      description: User data was saved successfully
+      schema:
+        $ref: "#/definitions/User"
+    400:
+      description: Bad JSON formatting in the request
+    401:
+      description: You tried to edit someone else's account, and you're not the "admin" user.
+    404:
+      description: The {username} was not found
+delete:
+  tags:
+    - "users"
+  parameters:
+  - $ref: "#/parameters/Username"
+  responses:
+    204:
+      description: User was deleted
+    401:
+      description: You tried to edit someone else's account, and you're not the "admin" user.
+    404:
+      description: The {username} was not found
