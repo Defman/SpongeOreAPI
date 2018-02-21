@@ -35,14 +35,14 @@ Version:
   description: "version of the plugin to return"
   required: true
   type: "string"
-Page:
+PageSize:
   name: "pageSize"
   in: "query"
   required: false
   default: 25
   type: "integer"
   format: "int64"
-PageSize:
+Page:
   name: "page"
   in: "query"
   required: false
